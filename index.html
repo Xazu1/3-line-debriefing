@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3行デイリー・デブリーフィング</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main>
+        <!-- 2.1 コア機能：3行レビュー記録 -->
+        <section id="input-area">
+            <form id="debrief-form">
+                <div>
+                    <label for="event-input">出来事 (Event):</label>
+                    <textarea id="event-input" name="event" rows="3" required></textarea>
+                </div>
+                <div>
+                    <label for="win-input">学び (Win):</label>
+                    <textarea id="win-input" name="win" rows="3" required></textarea>
+                </div>
+                <div>
+                    <label for="next-input">次にやること (Next):</label>
+                    <textarea id="next-input" name="next" rows="3" required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" id="use-template-btn" class="secondary-btn">テンプレートを使用</button>
+                    <button type="button" id="manage-templates-btn" class="secondary-btn">テンプレートを管理</button>
+                    <button type="submit">保存</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- 2.2 コア機能：レビューログ一覧 -->
+        <section id="log-area">
+            <div class="log-area-header">
+                <h2>振り返りログ</h2>
+                <button id="clear-all-btn">全件削除</button>
+            </div>
+            <ul id="log-list">
+                <!-- ログエントリーはJavaScriptによって動的にここに挿入されます -->
+            </ul>
+        </section>
+    </main>
+
+    <!-- 2.4 新增功能：模板管理界面 (Modal) -->
+    <div id="template-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="modal-close-btn">&times;</span>
+            <h2>テンプレート管理</h2>
+            
+            <div class="template-section">
+                <h3>既存のテンプレート</h3>
+                <ul id="template-list">
+                    <!-- 模板列表将通过JavaScript动态插入此处 -->
+                </ul>
+            </div>
+
+            <div class="template-section">
+                <h3>新規テンプレート</h3>
+                <form id="add-template-form">
+                    <label for="new-template-name">テンプレート名</label>
+                    <input type="text" id="new-template-name" placeholder="例: 週次定例" required>
+                    <label for="new-template-content">テンプレート内容</label>
+                    <textarea id="new-template-content" placeholder="Eventのテキストをここに入力" required></textarea>
+                    <button type="submit">新しいテンプレートを保存</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
