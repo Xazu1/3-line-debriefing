@@ -154,15 +154,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 const date = new Date(log.timestamp);
                 const formattedDate = date.toLocaleDateString('ja-JP', { year: 'numeric', month: 'short', day: 'numeric' });
 
+                // --- START: Win Preview Logic (Error Fixed) ---
+                let winPreviewHTML = ''; // Default to empty
+                if (log.win && log.win.trim()) { // Check for existence and non-empty
+                    const winPreviewText = log.win.length > 50 ? log.win.substring(0, 50) + '...' : log.win;
+                    winPreviewHTML = `<div class="log-win-preview">${winPreviewText.replace(/\n/g, '<br>')}</div>`;
+                }
+                // --- END: Win Preview Logic ---
+
+                // Use the first line of the event as the title, or an empty string if not present.
+                const eventTitle = (log.event || '').split('\n')[0];
+
                 li.innerHTML = `
                     <div class="log-header">
-                        <span class="log-event-title">${log.event}</span>
+                        <div class="log-header-main">
+                            <span class="log-event-title">${eventTitle}</span>
+                            ${winPreviewHTML}
+                        </div>
                         <time datetime="${log.timestamp}">${formattedDate}</time>
                     </div>
                     <div class="log-details">
-                        <p><strong>出来事 (Event):</strong><br>${log.event.replace(/\n/g, '<br>')}</p>
-                        <p><strong>学び (Win):</strong><br>${log.win.replace(/\n/g, '<br>')}</p>
-                        <p><strong>次にやること (Next):</strong><br>${log.next.replace(/\n/g, '<br>')}</p>
+                        <p><strong>出来事 (Event):</strong><br>${(log.event || '').replace(/\n/g, '<br>')}</p>
+                        <p class="log-win-full"><strong>学び (Win):</strong><br>${(log.win || '').replace(/\n/g, '<br>')}</p>
+                        <p><strong>次にやること (Next):</strong><br>${(log.next || '').replace(/\n/g, '<br>')}</p>
                     </div>
                 `;
 
@@ -206,4 +220,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
     renderLogs();
 });
-

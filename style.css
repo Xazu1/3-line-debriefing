@@ -130,18 +130,30 @@ h2 {
 .log-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start; /* 顶部对齐 */
     padding: 15px;
     cursor: pointer;
     user-select: none;
+    gap: 15px; /* 在标题和日期之间增加间距 */
 }
 
 .log-header:hover {
     background-color: #3a3a3a;
 }
 
+.log-header-main {
+    flex-grow: 1; /* 让主内容区占据更多空间 */
+}
+
 .log-event-title {
     font-weight: bold;
+    display: block; /* 让标题单独占一行 */
+    margin-bottom: 8px; /* 标题和Win预览之间的间距 */
+}
+
+.log-header time {
+    flex-shrink: 0; /* 防止日期被压缩 */
+    white-space: nowrap;
 }
 
 .log-header::after {
@@ -149,6 +161,7 @@ h2 {
     font-size: 0.8em;
     color: #888;
     transition: transform 0.3s ease;
+    align-self: center; /* 箭头垂直居中 */
 }
 
 .log-entry.expanded .log-header::after {
@@ -168,6 +181,27 @@ h2 {
 .log-entry.expanded .log-details {
     display: block;
 }
+
+/* --- START: Win预览和详情的突出样式 --- */
+.log-win-preview {
+    color: #FFD700; /* 金色文字 */
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.log-win-preview::before {
+    content: '🏆 '; /* 前置奖杯图标 */
+}
+
+.log-win-full strong {
+    color: #FFD700; /* 详情中的“学び (Win)”标题也用金色 */
+}
+
+.log-win-full strong::before {
+    content: '🏆 '; /* 详情中的标题也加上奖杯 */
+}
+/* --- END: Win预览和详情的突出样式 --- */
+
 
 /* --- 新增：模板管理模态框 (Modal) 样式 --- */
 
